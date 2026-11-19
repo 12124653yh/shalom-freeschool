@@ -179,7 +179,7 @@ nav ul li a.active::after {
   padding: 8px;
 }
 
-/* ================= Full-Width Hero Section ================= */
+/* ================= Full-Width Hero Section & Multi-Slide Carousel ================= */
 .hero-full {
   position: relative;
   width: 100%;
@@ -189,34 +189,194 @@ nav ul li a.active::after {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-image: url('images/hero.jpg');
+  color: var(--text-white);
+  padding: 16vh 24px 100px;
+  overflow: hidden;
+  background-color: #1a3928;
+}
+
+/* Background Slides Wrapper */
+.hero-slides-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.75s;
+  will-change: opacity, transform;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.hero-slide-bg {
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  color: var(--text-white);
-  padding: 16vh 24px 100px;
+  transform: scale(1.05);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-slide-bg {
+  transform: scale(1);
+}
+
+/* Placeholder for Hero slides without an uploaded photo */
+.hero-slide-placeholder {
+  background: linear-gradient(135deg, #183827 0%, #29573d 50%, #1f402e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slot-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px dashed rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 22px 36px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero-slot-badge .slot-badge-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #a7e0c0;
+  letter-spacing: 0.04em;
+}
+
+.hero-slot-badge .slot-badge-hint {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 /* Natural Softer Overlay to maintain photo brightness and ensure readability */
-.hero-full::before {
-  content: '';
+.hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(25, 55, 38, 0.36) 0%,
-    rgba(25, 55, 38, 0.24) 55%,
-    rgba(25, 55, 38, 0.42) 100%
+    rgba(22, 50, 34, 0.38) 0%,
+    rgba(22, 50, 34, 0.24) 55%,
+    rgba(22, 50, 34, 0.44) 100%
   );
-  z-index: 1;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .hero-full-content {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   max-width: 900px;
   margin: 0 auto;
   animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Hero Carousel Arrow Buttons (Translucent on hover) */
+.hero-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.35s,
+              background-color 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  outline: none;
+}
+
+.hero-nav-prev {
+  left: 28px;
+}
+
+.hero-nav-next {
+  right: 28px;
+}
+
+/* Reveal buttons translucently when mouse hovers on hero-full */
+.hero-full:hover .hero-nav-btn {
+  opacity: 0.85;
+  visibility: visible;
+}
+
+.hero-nav-btn:hover {
+  opacity: 1 !important;
+  background-color: rgba(255, 255, 255, 0.42);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38);
+}
+
+.hero-nav-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+/* Slide Indicator Dots at bottom of hero */
+.hero-indicators {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.hero-indicator-dot.active {
+  width: 32px;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 @keyframes heroFadeIn {
@@ -1333,6 +1493,21 @@ footer {
   }
   .hero-full-subtitle {
     font-size: 1.15rem;
+  }
+  .hero-nav-btn {
+    opacity: 0.8;
+    visibility: visible;
+    width: 38px;
+    height: 38px;
+  }
+  .hero-nav-prev {
+    left: 12px;
+  }
+  .hero-nav-next {
+    right: 12px;
+  }
+  .hero-indicators {
+    bottom: 18px;
   }
 }
 
