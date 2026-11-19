@@ -293,19 +293,19 @@ nav ul li a.active::after {
   animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Hero Carousel Arrow Buttons (Translucent on hover) */
+/* Hero Carousel Arrow Buttons (훨씬 작고, 호버 시 1초 동안 부드러운 그라데이션 페이드 인) */
 .hero-nav-btn {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.92);
   z-index: 10;
-  width: 46px;
-  height: 46px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 100%);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -313,58 +313,76 @@ nav ul li a.active::after {
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.35s,
-              background-color 0.25s ease,
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 1s,
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.25s ease,
               box-shadow 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   outline: none;
 }
 
 .hero-nav-prev {
-  left: 28px;
+  left: 20px;
 }
 
 .hero-nav-next {
-  right: 28px;
+  right: 20px;
 }
 
-/* Reveal buttons translucently when mouse hovers on hero-full */
+/* Hero 호버 시 1초에 걸쳐 부드러운 그라데이션 느낌으로 등장 */
 .hero-full:hover .hero-nav-btn {
-  opacity: 0.85;
+  opacity: 0.88;
   visibility: visible;
+  transform: translateY(-50%) scale(1);
 }
 
 .hero-nav-btn:hover {
   opacity: 1 !important;
-  background-color: rgba(255, 255, 255, 0.42);
-  border-color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.22) 100%);
+  border-color: rgba(255, 255, 255, 0.75);
   transform: translateY(-50%) scale(1.12);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hero-nav-btn:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.94);
 }
 
-/* Slide Indicator Dots at bottom of hero */
+/* Slide Indicator Dots: 커서를 올렸을 때만 1초 페이드인으로 보이게 설정 */
 .hero-indicators {
   position: absolute;
-  bottom: 28px;
+  bottom: 24px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(8px);
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 1s,
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Hero 호버 시 인디케이터 바도 함께 부드럽게 등장 */
+.hero-full:hover .hero-indicators {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .hero-indicator-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: var(--radius-full);
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.45);
   border: none;
   cursor: pointer;
   padding: 0;
@@ -374,9 +392,9 @@ nav ul li a.active::after {
 }
 
 .hero-indicator-dot.active {
-  width: 32px;
+  width: 26px;
   background-color: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 @keyframes heroFadeIn {
@@ -1497,17 +1515,21 @@ footer {
   .hero-nav-btn {
     opacity: 0.8;
     visibility: visible;
-    width: 38px;
-    height: 38px;
+    width: 28px;
+    height: 28px;
+    transform: translateY(-50%);
   }
   .hero-nav-prev {
-    left: 12px;
+    left: 10px;
   }
   .hero-nav-next {
-    right: 12px;
+    right: 10px;
   }
   .hero-indicators {
-    bottom: 18px;
+    opacity: 0.9;
+    visibility: visible;
+    bottom: 14px;
+    transform: translateX(-50%);
   }
 }
 
