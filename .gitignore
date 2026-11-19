@@ -1,0 +1,8 @@
+# Temporary scratch files and logs
+scratch/
+*.log
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+node_modules/

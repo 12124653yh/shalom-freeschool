@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교육철학 | 샬롬자유학교</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Philosophy Detail Page Styles */
+    .philo-page-hero {
+      background: linear-gradient(rgba(18, 43, 30, 0.48), rgba(18, 43, 30, 0.70)), url('images/hero_philosophy.jpg') center center/cover no-repeat;
+      color: #ffffff;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 170px 24px 150px;
+      text-align: center;
+    }
+
+    .philo-page-hero h2 {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .philo-page-hero p {
+      font-size: 1.25rem;
+      color: var(--green-accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* Jump Navigation Bar */
+    .philo-nav-bar {
+      background-color: var(--bg-white);
+      border-bottom: 1px solid var(--border-green-light);
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+    }
+
+    .philo-nav-inner {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      padding: 16px 0;
+    }
+
+    .philo-nav-link {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      transition: all 0.2s ease;
+    }
+
+    .philo-nav-link:hover {
+      color: var(--green-primary);
+      background-color: var(--green-tint);
+    }
+
+    /* Philosophy Article Body */
+    .philo-article-section {
+      background-color: var(--bg-page);
+      padding: 90px 0 120px;
+    }
+
+    .philo-intro-essay {
+      max-width: 820px;
+      margin: 0 auto 90px;
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-green-light);
+      border-radius: var(--radius-lg);
+      padding: 50px 48px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    .philo-intro-essay .pill-tag {
+      display: inline-block;
+      background-color: var(--green-tint);
+      color: var(--green-primary);
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    .philo-intro-essay h3 {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .philo-intro-essay p {
+      font-size: 1.05rem;
+      color: var(--text-body-dark);
+      line-height: 1.85;
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    /* Individual Philosophy Pillars */
+    .philo-pillar-card {
+      max-width: 900px;
+      margin: 0 auto 70px;
+      background-color: var(--bg-white);
+      border: 1.5px solid var(--border-green-light);
+      border-radius: var(--radius-lg);
+      padding: 56px 52px;
+      box-shadow: var(--shadow-card);
+      scroll-margin-top: 150px;
+    }
+
+    .pillar-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      border-bottom: 2px solid var(--green-tint);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    .pillar-num {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--green-primary);
+    }
+
+    .pillar-title-wrap h3 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.2;
+    }
+
+    .pillar-title-wrap span {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--green-medium);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .pillar-body p {
+      font-size: 1.04rem;
+      color: var(--text-body-dark);
+      line-height: 1.9;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    .pillar-quote-box {
+      background-color: var(--green-tint);
+      border-left: 4px solid var(--green-primary);
+      padding: 24px 28px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 28px 0;
+    }
+
+    .pillar-quote-box h4 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+
+    .pillar-quote-box p {
+      font-size: 0.96rem;
+      color: var(--text-body-dark);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .pillar-points-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .pillar-point-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background-color: #fafcfb;
+      border: 1px solid var(--border-green-light);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+    }
+
+    .point-badge {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--green-primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .point-content h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .point-content p {
+      font-size: 0.95rem;
+      color: var(--text-body-dark);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .philo-page-hero h2 {
+        font-size: 2.5rem;
+      }
+      .philo-intro-essay,
+      .philo-pillar-card {
+        padding: 36px 24px;
+      }
+      .philo-nav-inner {
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo-area">
+        <img src="images/logo_transparent.png" alt="샬롬자유학교 로고" class="logo-img">
+        <div class="logo-text">
+          <h1>샬롬자유학교</h1>
+          <span>SHALOM FREE CHRISTIAN SCHOOL</span>
+        </div>
+      </a>
+
+      <!-- Right Navigation -->
+      <nav>
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="philosophy.html" class="active">교육철학</a></li>
+          <li><a href="curriculum.html">교육과정</a></li>
+          <li><a href="index.html#life">학교 생활</a></li>
+          <li><a href="index.html#community">학교 공동체</a></li>
+          <li><a href="index.html#gallery">갤러리</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-btn" aria-label="메뉴 열기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="philo-page-hero">
+      <div class="container">
+        <h2>샬롬자유학교 교육철학</h2>
+        <p>하나님의 형상을 회복하며 삶의 힘을 기르는 교육</p>
+      </div>
+    </section>
+
+    <!-- Sub Navigation for Jumping to Pillars -->
+    <nav class="philo-nav-bar">
+      <div class="container philo-nav-inner">
+        <a href="#freedom" class="philo-nav-link">01. 자유의 맛</a>
+        <a href="#love" class="philo-nav-link">02. 사랑의 멋</a>
+        <a href="#alternative" class="philo-nav-link">03. 대안의 삶</a>
+      </div>
+    </nav>
+
+    <!-- Philosophy Detail Section -->
+    <section class="philo-article-section">
+      <div class="container">
+
+        <!-- Introduction Narrative -->
+        <article class="philo-intro-essay">
+          <span class="pill-tag">교육철학</span>
+          <h3>“하나님의 형상을 회복하는 교육”</h3>
+          <p>
+            샬롬자유학교의 교육을 한 마디로 정의한다면 <strong>“하나님의 형상을 회복하며 삶의 힘을 기르는 교육”</strong>이라고 말할 수 있습니다. 
+            학교는 이러한 학교의 정체성을 교육철학의 영역에서는 <strong>“하나님의 형상을 회복하는 교육”</strong>으로, 
+            교육과정의 영역에서는 <strong>“삶의 힘을 기르는 교육”</strong>으로 구체화하고자 노력하고 있습니다.
+          </p>
+          <p style="margin-top: 16px;">
+            우선 “하나님의 형상”이라는 개념이 대단히 광범위하기에, 
+            샬롬자유학교에서는 6년의 교육과정 중 회복해야 할 하나님의 형상이 무엇인지 교사와 학생이 함께 일주일간 토의를 하여 
+            <strong>“자유의 맛, 사랑의 멋, 대안의 삶”</strong>이라는 우리가 학교생활 중 회복해야 할 가치들로 정하였습니다.(2017년 무빙스쿨)
+          </p>
+        </article>
+
+        <!-- Pillar 1: 자유의 맛 -->
+        <article class="philo-pillar-card" id="freedom">
+          <div class="pillar-header">
+            <span class="pillar-num">01</span>
+            <div class="pillar-title-wrap">
+              <h3>자유의 맛</h3>
+              <span>아이들이 삶의 주체가 되어 살아가는 것</span>
+            </div>
+          </div>
+
+          <div class="pillar-body">
+            <p>
+              샬롬자유학교가 말하는 “자유의 맛”은 아이들이 삶의 주체가 되어 살아가는 것입니다. 
+              기존의 표준화된 교육 구조 속에서는 정형화된 틀과 평가 중심의 기준에 맞추다 보니, 아이들 각자의 고유한 가능성과 자율성을 온전히 꽃피우기 어려운 한계가 있었습니다. 
+              또한 서열과 경쟁을 익숙하게 받아들이는 환경은 아이들의 잠재력과 주체성을 제약하기도 합니다.
+            </p>
+
+            <div class="pillar-quote-box">
+              <h4>배움의 본질을 회복하는 대안적 교육</h4>
+              <p>
+                교육사회학자 이반 일리치가 지적한 “학교화된 사회”의 한계를 넘어, 샬롬자유학교는 배움의 본질을 회복하며 아이들이 삶의 주체가 되어 살아가도록 교육합니다. 
+                학교와 교육은 지식을 일방적으로 주입하는 것이 아니라, 하나님의 형상을 품은 아이들의 고유한 잠재력을 이끌어내는 든든한 마중물이 되고자 합니다.
+              </p>
+            </div>
+
+            <p>
+              아이들이 교육과정에 자발적으로 참여하며 삶의 주체로서의 역량을 키우는 데 배움의 초점을 맞추고 있습니다. 
+              자발적인 삶을 살아간다는 것은 단순한 방종이 아니기에, 샬롬자유학교에서는 성경에 기초한 두 가지의 자유를 소중히 배웁니다.
+            </p>
+
+            <div class="pillar-points-list">
+              <div class="pillar-point-item">
+                <span class="point-badge">1</span>
+                <div class="point-content">
+                  <h5>첫 번째 자유: “종된 것으로부터의 자유” (갈 5:1)</h5>
+                  <p>
+                    우리의 자녀들은 미디어와 SNS, 물질적 소비와 경쟁적 평가 등 세상의 다양한 유혹과 외부의 기준에 쉽게 영향을 받습니다. 
+                    이러한 자극과 유혹에 휘둘리기보다 스스로를 건강하게 절제하고 다스릴 수 있을 때, 참된 자유와 온전한 인격을 누릴 수 있습니다. 
+                    샬롬자유학교에서는 세상의 욕망을 바르게 통제하고 절제하며 자기 삶을 주도적으로 이끌어가는 연습을 합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="pillar-point-item">
+                <span class="point-badge">2</span>
+                <div class="point-content">
+                  <h5>두 번째 자유: “사랑으로 종 노릇 할 자유” (갈 5:13)</h5>
+                  <p>
+                    진정한 자유는 나 자신만을 위한 것에 머무르지 않고, 자신이 사랑하는 이웃과 공동체를 위하여 기꺼이 섬길 수 있는 헌신입니다. 
+                    샬롬자유학교에서 자라난 학생들이 사회를 따뜻하게 변화시키고, 도움이 필요한 연약한 사람들을 품으며, 대안적 공동체를 세워가는 아름다운 주역이 되기를 소망합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p style="margin-top: 24px;">
+              학교에서는 이러한 자유를 경험하기 위해 <strong>“선택하고 책임지는 연습”</strong>을 지속적으로 해 나가고 있습니다. 
+              작게는 자신이 들을 수업을 스스로 선택하고 책임지며, 크게는 자기 삶의 방향을 위해 무엇을 준비해야 할지 선택하고 책임지는 연습을 합니다. 
+              개인프로젝트, 프리패스, 동아리, 각종 인턴십, 주제학습 학기 등 다채로운 교육과정이 아이들의 자발적인 선택과 성장을 기다립니다.
+            </p>
+          </div>
+        </article>
+
+        <!-- Pillar 2: 사랑의 멋 -->
+        <article class="philo-pillar-card" id="love">
+          <div class="pillar-header">
+            <span class="pillar-num">02</span>
+            <div class="pillar-title-wrap">
+              <h3>사랑의 멋</h3>
+              <span>하나님 사랑, 나와 이웃 사랑, 자연 사랑</span>
+            </div>
+          </div>
+
+          <div class="pillar-body">
+            <p>
+              샬롬자유학교에서 누리고자 하는 “사랑의 멋”은 하나님 사랑, 나와 이웃 사랑, 자연 사랑이 모두 포함되는 광의의 개념입니다. 
+              이 셋은 결코 떨어지지 않는 개념이라고 생각하며 교육과정 중에서 할 수 있는 것들을 하나씩 실천하고 있습니다.
+            </p>
+
+            <div class="pillar-points-list">
+              <div class="pillar-point-item">
+                <span class="point-badge">1</span>
+                <div class="point-content">
+                  <h5>하나님 사랑과 일주일에 한 번 마을 청소</h5>
+                  <p>
+                    하나님에 대하여 알아가기 위하여 주3회 아침묵상을 하고 주일이면 함께 예배를 드립니다. 샬롬자유학교의 하나님 사랑은 종교행위에 집중하기보다는 삶이 묻어나고 삶을 위한 시간이기를 바라며 진행되고 있습니다. 
+                    그래서 일주일에 한 번은 꼭 학교가 위치한 마을에 쓰레기 봉투와 집게를 들고 나가서 청소를 합니다. 이 과정에서 아이들은 지속되는 마을청소가 마을을 변화시키고 있음을 경험합니다. 지저분한 쓰레기가 모여있던 곳을 몇 달 청소하니 마을 어른들이 깨끗하게 치워놓고 꽃밭을 만들기도 하고, 지역 분들은 물론 경찰관들도 우리 학교의 학생들을 보면 먼저 인사를 건네고 칭찬을 해주십니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="pillar-point-item">
+                <span class="point-badge">2</span>
+                <div class="point-content">
+                  <h5>기숙사 생활 — 사람 사랑을 배우는 가장 중요한 숨은 교육과정</h5>
+                  <p>
+                    우리 자신과 주변 사람에 대한 이해를 넓히기 위하여 진행되는 여러가지 수업들은 자기 자신을 사랑하고 내 옆에 있는 친구들을 사랑하며 살아가는데 큰 힘이 됩니다. 
+                    특히 기숙사 생활은 사람 사랑을 배우는 가장 소중한 숨은 교육과정입니다. 24시간을 함께 살아가는 일상 속에서 서로 다른 생각과 갈등을 마주할 때, 이를 외면하기보다 정직하게 마주하며 화해와 조정을 거쳐 서로를 더 깊이 이해하고 성숙한 인격으로 성장해 갑니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 3: 대안의 삶 -->
+        <article class="philo-pillar-card" id="alternative">
+          <div class="pillar-header">
+            <span class="pillar-num">03</span>
+            <div class="pillar-title-wrap">
+              <h3>대안의 삶</h3>
+              <span>앎과 삶의 일치</span>
+            </div>
+          </div>
+
+          <div class="pillar-body">
+            <p>
+              이렇게 살아가며 자신만의 삶의 대안을 찾는 것이 샬롬자유학교 교육의 정점에 있습니다. 
+              학교를 졸업하면 누구나 자신의 삶을 살아가야 하기에, 한 가지 획일적인 삶의 방식을 강조하지 않습니다. 
+              대신 경쟁과 물질 중심의 세태 속에서도 성경적 가치와 생명 존중의 대안을 일상에서 실천하고 드러내며 살기를 바라는 마음으로 “대안의 삶”을 경험합니다.
+            </p>
+
+            <div class="pillar-quote-box">
+              <h4>앎과 삶의 일치</h4>
+              <p>
+                대안의 삶을 위하여 가장 중요한 시작은 “앎과 삶의 일치”라고 생각합니다. 
+                지식과 정보가 넘쳐나는 시대에 단순히 아는 것에 머무르지 않고, 작은 앎이라도 삶의 자리에서 성실하게 실천하는 배움을 지향합니다. 
+                샬롬자유학교는 많이 알기보다는 적게 알더라도 아는 대로 살아낼 수 있기를 바랍니다. 아이들은 단지 시험 점수를 위해 공부하는 것이 아니라, 이 사회를 함께 살아가는 데 꼭 필요한 지식을 배우고 오늘의 삶에 실천하는 데 시간과 정성을 쏟습니다.
+              </p>
+            </div>
+
+            <div class="pillar-points-list">
+              <div class="pillar-point-item">
+                <span class="point-badge">1</span>
+                <div class="point-content">
+                  <h5>학교 안에서의 실현: 기본소득, 학교화폐, 콩앗이</h5>
+                  <p>
+                    앎과 삶의 일치를 바라는 교육을 통하여 학교에는 <strong>기본소득</strong>, <strong>학교화폐</strong>, <strong>콩앗이(타임뱅크 샬자판)</strong> 등이 실현되고 있습니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="pillar-point-item">
+                <span class="point-badge">2</span>
+                <div class="point-content">
+                  <h5>지역사회 연대와 하나님 나라 운동</h5>
+                  <p>
+                    대안의 삶이 작은 마을 단위에서라도 실천되기 위하여 지역사회와 연대하는 교육과정을 하면서 작게나마 하나님 나라 운동을 실천하고 있습니다. 
+                    학교는 학기에 한 번 이상 주민들과 함께 소통하는 장을 마련하고, 교육과정 공유회나 졸업식을 하면서 마을과 함께 학교의 이야기를 나누고 있습니다. 
+                    마을에서 이루어지는 장터에 나가 물건을 팔면서 함께 하기도 하고 마을의 축제에 초대되어 공연을 하기도 하는데, 이러한 것들이 우리만을 위한 것이 아니라 하나님 나라 운동이 되기를 바라며 노력하고 있습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <section class="curr-bottom-bar" style="background-color: var(--green-dark); color: #ffffff; text-align: center; padding: 60px 0;">
+      <div class="container">
+        <h3 style="font-family: var(--font-serif); font-size: 1.9rem; color: #ffffff; margin-bottom: 14px;">1년 3학기 교육과정이 궁금하신가요?</h3>
+        <p style="font-size: 1.05rem; color: var(--green-accent); margin-bottom: 28px;">삶의 기초를 세우는 교육, 삶의 방향을 탐색하는 교육, 삶의 대안을 모색하는 교육</p>
+        <a href="curriculum.html" class="btn-white-round">
+          교육과정 바로가기
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-wrap">
+          <img src="images/logo_transparent.png" alt="샬롬자유학교 로고" class="footer-logo">
+          <div class="footer-brand">
+            <h3>샬롬자유학교</h3>
+            <p>
+              "하나님의 형상을 회복하고 삶의 힘을 기르는 교육"에 목적을 두고, 자유와 사랑, 그리고 대안의 삶을 추구하고자 하는 청소년들의 교육공동체입니다. 스스로 선택하고, 책임지며, 서로를 안아주면서, 나도 기댈 수 있는 공동체를 만들어 갑니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          <h4>학교 정보 및 공식 채널</h4>
+          <div class="footer-info-list">
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span><strong>전화번호</strong> 031-581-6767 / 010-5528-9596</span>
+            </div>
+
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span><strong>이메일</strong> sfcy2019@naver.com (또는 shalomfree@shalomfree.kr)</span>
+            </div>
+
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span><strong>주소</strong> 경기도 가평군 북면 석장모루길 11 2층 샬롬자유학교</span>
+            </div>
+          </div>
+
+          <div class="footer-social-links">
+            <a href="https://www.youtube.com/@devote7joy" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+              유튜브 채널
+            </a>
+
+            <a href="https://www.instagram.com/shalom_freedom/" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              인스타그램
+            </a>
+
+            <a href="https://m.blog.naver.com/sfcy2019?tab=1" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M4 4h16v16H4z"></path>
+                <path d="M9 8v8l6-8v8"></path>
+              </svg>
+              네이버 블로그
+            </a>
+
+            <a href="https://www.facebook.com/share/18oFF7Y9Ua/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+              페이스북
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 샬롬자유교육공동체 (Shalom Free Education Community). All rights reserved.</p>
+        <p>기독대안학교 · 경기도 가평</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Animation System -->
+  <script src="scroll-anim.js" defer></script>
+</body>
+</html>

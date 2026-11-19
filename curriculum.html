@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교육과정 | 샬롬자유학교</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Curriculum Detailed Page Styles */
+    .curr-page-hero {
+      background: linear-gradient(rgba(18, 43, 30, 0.48), rgba(18, 43, 30, 0.70)), url('images/hero_curriculum.jpg') center center/cover no-repeat;
+      color: #ffffff;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 170px 24px 150px;
+      text-align: center;
+    }
+
+    .curr-page-hero h2 {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .curr-page-hero p {
+      font-size: 1.3rem;
+      color: var(--green-accent);
+      letter-spacing: 0.03em;
+    }
+
+    /* Core Principles (Why 3 Trimesters) */
+    .curr-intro-section {
+      background-color: var(--green-tint);
+      padding: 70px 0;
+      border-bottom: 1px solid var(--border-green-light);
+    }
+
+    .curr-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .curr-intro-box {
+      background-color: var(--bg-white);
+      border: 1.5px solid var(--border-green-light);
+      border-left: 5px solid var(--green-primary);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .curr-intro-box h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .curr-intro-box h4 svg {
+      stroke: var(--green-primary);
+    }
+
+    .curr-intro-box p {
+      font-size: 0.98rem;
+      color: var(--text-body-dark);
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    /* Detailed Trimester Blocks */
+    .trimester-detail-section {
+      background-color: var(--bg-white);
+      padding: 90px 0 100px;
+    }
+
+    .trimester-large-card {
+      background-color: var(--bg-white);
+      border: 2px solid var(--border-green-light);
+      border-top: 6px solid var(--green-primary);
+      border-radius: var(--radius-lg);
+      padding: 48px 44px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+      scroll-margin-top: 110px;
+    }
+
+    .trimester-large-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-top-color: var(--green-vibrant);
+    }
+
+    .trimester-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--green-tint);
+      padding-bottom: 26px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .head-title-wrap .term-pill {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--green-primary);
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .head-title-wrap h3 {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .trimester-motto-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      background-color: var(--green-tint);
+      border: 1px solid var(--border-green-light);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+    }
+
+    .trimester-card-body {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .body-left-content h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-title-dark);
+      margin-bottom: 14px;
+    }
+
+    .body-left-content p {
+      font-size: 1rem;
+      color: var(--text-body-dark);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    .bullet-spec-box {
+      background-color: var(--green-tint);
+      border-left: 4px solid var(--green-primary);
+      padding: 22px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .bullet-spec-box h5 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+    }
+
+    .bullet-spec-box ul {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 0.94rem;
+      color: var(--text-body-dark);
+    }
+
+    /* Right Highlight Box */
+    .highlight-act-card {
+      background: linear-gradient(145deg, #ffffff 0%, var(--green-tint) 100%);
+      border: 1.5px solid var(--border-green-light);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+    }
+
+    .act-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      background-color: var(--green-primary);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+
+    .highlight-act-card h4 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+
+    .highlight-act-card p {
+      font-size: 0.95rem;
+      color: var(--text-body-dark);
+      line-height: 1.75;
+      margin-bottom: 18px;
+      word-break: keep-all;
+    }
+
+    .act-records {
+      border-top: 1px solid var(--border-green-light);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .act-records strong {
+      color: var(--green-primary);
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.92rem;
+      border-bottom: 1px dashed var(--border-green-light);
+      padding-bottom: 8px;
+    }
+
+    .step-item strong {
+      color: var(--green-primary);
+      min-width: 80px;
+    }
+
+    /* Bottom Nav Bar */
+    .curr-bottom-bar {
+      background-color: var(--green-dark);
+      color: #ffffff;
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .curr-bottom-bar h3 {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .curr-bottom-bar p {
+      font-size: 1.05rem;
+      color: var(--green-accent);
+      margin-bottom: 28px;
+    }
+
+    .btn-white-round {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ffffff;
+      color: var(--green-dark);
+      padding: 13px 32px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.98rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-white-round:hover {
+      background-color: var(--green-tint);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      .curr-intro-grid,
+      .trimester-card-body {
+        grid-template-columns: 1fr;
+      }
+      .curr-page-hero h2 {
+        font-size: 2.5rem;
+      }
+      .trimester-large-card {
+        padding: 32px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo-area">
+        <img src="images/logo_transparent.png" alt="샬롬자유학교 로고" class="logo-img">
+        <div class="logo-text">
+          <h1>샬롬자유학교</h1>
+          <span>SHALOM FREE CHRISTIAN SCHOOL</span>
+        </div>
+      </a>
+
+      <!-- Right Navigation (순서: 홈, 교육철학, 교육과정, 학교 생활, 학교 공동체) -->
+      <nav>
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="philosophy.html">교육철학</a></li>
+          <li><a href="curriculum.html" class="active">교육과정</a></li>
+          <li><a href="index.html#life">학교 생활</a></li>
+          <li><a href="index.html#community">학교 공동체</a></li>
+          <li><a href="index.html#gallery">갤러리</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-btn" aria-label="메뉴 열기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Banner with Full Image Background -->
+    <section class="curr-page-hero">
+      <div class="container">
+        <h2>샬롬자유학교 교육과정</h2>
+        <p>삶의 힘을 기르는 교육 (1년 3학기제)</p>
+      </div>
+    </section>
+
+    <!-- 1 Year 3 Trimester Intro -->
+    <section class="curr-intro-section">
+      <div class="container">
+        <div class="curr-intro-grid">
+          <div class="curr-intro-box">
+            <h4>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              왜 1년 3학기로 구성되어 있는가?
+            </h4>
+            <p>
+              보통의 학교가 2학기로 구성되어 있는 것과는 달리 1년을 3학기로 구성한 이유는, 24시간 함께 생활하는 기숙 공동체 생활 속에서 학생들의 심신을 건강하게 보살피고 충분한 쉼과 회복의 균형을 유지하며, 4월과 8월에 시행되는 검정고시 일정과도 원활하게 연계하기 위해서입니다.
+            </p>
+          </div>
+
+          <div class="curr-intro-box">
+            <h4>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              패러다임의 전환: “학교가 누구의 것이지?”
+            </h4>
+            <p>
+              “학교가 누구의 것이지?” 만약 학교의 주인이 학생이라면 교과과정을 편성하는 권한과 책임을 가진 교사가 학생들의 생각과 느낌, 교과과정 편성에 대한 의견과 자율성을 어떻게 존중할 것인지에 대해서 고민하지 않을 수 없게 됩니다. 이런 고민을 반영하여 샬롬자유학교의 교육과정의 중심에는 학생이 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trimester Breakdown -->
+    <section class="trimester-detail-section">
+      <div class="container">
+
+        <!-- Term 1 -->
+        <article class="trimester-large-card" id="term-1">
+          <div class="trimester-card-head">
+            <div class="head-title-wrap">
+              <span class="term-pill">제1학기</span>
+              <h3>삶의 기초를 세우는 교육</h3>
+            </div>
+            <div class="trimester-motto-badge">
+              언어능력 · 자기성찰능력 · 걷기 여행
+            </div>
+          </div>
+
+          <div class="trimester-card-body">
+            <div class="body-left-content">
+              <h4>언어능력과 자기성찰능력을 향상시키기 위한 교육과정</h4>
+              <p>
+                사람과 건강한 관계를 맺고 살아가는데 가장 기본이 되는 언어능력은 단순히 시험 점수를 얻는 기술을 넘어, 진정한 공감과 소통의 힘에 있습니다. 상대방을 판단하기에 앞서 있는 그대로 관찰하고, 자신의 솔직한 느낌과 마음 깊은 필요(Need)를 살피며, 상대에게 강요하지 않고 원하는 바를 평화롭게 전달하는 마샬 로젠버그의 비폭력대화(NVC)를 차근차근 배워나갑니다.
+              </p>
+
+              <div class="bullet-spec-box">
+                <h5>1학기 주요 학습 내용</h5>
+                <ul>
+                  <li>• 마샬 로젠버그의 비폭력대화 (관찰, 느낌, 욕구, 부탁)</li>
+                  <li>• 책을 읽고 생각을 나누는 깊이 있는 글쓰기 수업</li>
+                  <li>• 세상과 소통하며 삶의 지평을 넓혀가는 실용 영어 능력 배양</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="highlight-act-card">
+              <span class="act-tag">1학기 중요 활동</span>
+              <h4>걷기 여행</h4>
+              <p>
+                걷기는 우리 신체의 기초를 다지는데 가장 적합한 활동이기도 하고, 체력의 한계를 넘어서며 걷는 과정에서 성취감을 느끼며 자존감이 올라가기도 합니다. 어려움을 인내하고 걷는 과정에서 자기성찰이 이루어지는데, 1학기에 이루어진 자기 성찰과 타인 이해를 위한 과목들이 걷는 시간에 완성되어 자신의 것이 되기도 합니다.
+              </p>
+              <div class="act-records">
+                <span><strong>2021년</strong> “생태와 자연” 주제로 제주도 한 바퀴</span>
+                <span><strong>2022년</strong> 우크라이나 전쟁을 기억하며 “평화” 주제로 가평에서 임진각 평화공원까지</span>
+                <span><strong>2023년</strong> 10.29참사를 기억하며 “생명” 주제로 안산 4.16기억교실에서 시작하여 학교까지</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Term 2 -->
+        <article class="trimester-large-card" id="term-2">
+          <div class="trimester-card-head">
+            <div class="head-title-wrap">
+              <span class="term-pill">제2학기</span>
+              <h3>삶의 방향을 탐색하는 교육</h3>
+            </div>
+            <div class="trimester-motto-badge">
+              다중지능이론 · 사회참여학습 · 몰입주간과 인턴십
+            </div>
+          </div>
+
+          <div class="trimester-card-body">
+            <div class="body-left-content">
+              <h4>자신의 강점과 약점을 파악하고 사회 속으로 뛰어들어가는 시간</h4>
+              <p>
+                하버드대학교의 교육심리학자 하워드가드너의 다중지능이론에 따라 만들어진 다중지능 검사도 실시하고, 각각의 지능을 개발하고, 자신의 강점지능을 연계하여 삶의 방향을 탐색하는 수업을 합니다. 이렇게 탐색한 자신만의 특성을 실제 삶에 적용해보는 “사회참여학습”은 학교라는 제한된 공간을 벗어나 자신이 가고 싶고, 자기 장점을 최대한 활용할 수 있는 공간으로 직접 나가보는 경험으로 확장됩니다.
+              </p>
+
+              <div class="bullet-spec-box">
+                <h5>학년별 몰입주간과 인턴십</h5>
+                <div class="step-list">
+                  <div class="step-item">
+                    <strong>7~8학년</strong>
+                    <span>교내 2주간 <strong>몰입주간</strong> (보드게임 제작, 동영상 제작, 기타연주 완주 등 역량과 흥미에 집중)</span>
+                  </div>
+                  <div class="step-item">
+                    <strong>9학년</strong>
+                    <span>학교 주변 출퇴근 2주간 <strong>마을 인턴십</strong></span>
+                  </div>
+                  <div class="step-item">
+                    <strong>10학년</strong>
+                    <span>4주간 <strong>세미 인턴십</strong></span>
+                  </div>
+                  <div class="step-item">
+                    <strong>11학년</strong>
+                    <span>8주간 <strong>인턴십</strong> (관심사에 맞는 개인과 회사를 직접 선택하여 자기소개서 발송 및 면접)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="highlight-act-card">
+              <span class="act-tag">2학기 중점활동</span>
+              <h4>몰입주간과 인턴십</h4>
+              <p>
+                자신의 관심사와 궤적을 같이하는 개인과 회사를 선택하여 직접 자기소개서를 보내 면접을 보는 방식으로 회사에 인턴십을 나가는 친구들의 모습에는 설레임과 긴장, 두려움과 기대가 엇갈려 나타납니다.
+              </p>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0;">
+                그렇게 조금씩 사회를 경험하는 동안 세상을 향한 건강한 자신감을 얻고, 앞으로 자신이 준비해야 할 역량이 무엇인지 스스로 발견하는 값진 시간을 보냅니다.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Term 3 -->
+        <article class="trimester-large-card" id="term-3">
+          <div class="trimester-card-head">
+            <div class="head-title-wrap">
+              <span class="term-pill">제3학기</span>
+              <h3>삶의 대안을 모색하는 교육</h3>
+            </div>
+            <div class="trimester-motto-badge">
+              도덕지능이론 · 테마여행 · 대안 실현
+            </div>
+          </div>
+
+          <div class="trimester-card-body">
+            <div class="body-left-content">
+              <h4>지속가능하고 변혁적인 삶을 위해 삶의 기준을 세우고 앎과 삶을 일치시키기</h4>
+              <p>
+                3학기의 교육과정은 지속가능하고 변혁적인 삶을 위하여 자신의 삶의 기준을 세우고 어떤 분야에서 살아가든 앎과 삶을 일치시키는 모습으로 살아갈 수 있도록 준비하는데 목적을 둡니다. 사회에 나가서 무엇을 하든 대안적으로 그 일을 할 수 있는 방법을 모색하는 연습을 해볼 수 있는 과목들로 구성됩니다. 미셸보바의 도덕지능이론에 따라 도덕성의 덕목을 스스로 갖추면서 자신이 아는 것과 사는 것을 어떻게 일치시킬 것인지에 대한 고민이 담긴 교육과정을 통해 삶의 철학을 세우고 대안을 모색합니다.
+              </p>
+
+              <div class="bullet-spec-box">
+                <h5>3학기 배움과 실현</h5>
+                <ul>
+                  <li>• 미셸보바의 도덕지능이론에 따른 삶의 철학과 대안 모색</li>
+                  <li>• 학생 주도 테마여행 (만날 사람/기업 탐색, 연락, 동선 구성, 한 주간 여행)</li>
+                  <li>• 배움의 현장 실현: <strong>학교화폐</strong> 제작 및 <strong>기본소득</strong> 도입</li>
+                  <li>• 주민들과 함께하는 <strong>교육과정 공유회</strong> 및 졸업식 마을 나눔</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="highlight-act-card">
+              <span class="act-tag">3학기 중점활동</span>
+              <h4>테마여행</h4>
+              <p>
+                한 학기동안 한 가지 주제만 선정하여 그 주제를 다각도에서 연구하는 시간입니다. 2022년에는 '경제'를 주제로 공부했습니다.
+              </p>
+              <div class="act-records">
+                <span><strong>경제와 노동의 관계</strong> 조선소 현장, 제과제빵 노동 현장, 플랫폼 배달 노동자 인터뷰 등을 통해 땀 흘려 일하는 이들의 삶과 노동의 숭고한 가치 학습</span>
+                <span><strong>공정경제와 마을경제</strong> 전국 마을 기반 공정경제 사장님 방문 탐구 후 학교로 돌아와 학교화폐를 만들고 기본소득 도입</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Bottom Nav -->
+    <section class="curr-bottom-bar">
+      <div class="container">
+        <h3>샬롬자유학교의 교육철학이 궁금하신가요?</h3>
+        <p>자유의 맛, 사랑의 멋, 대안의 삶</p>
+        <a href="philosophy.html" class="btn-white-round">
+          교육철학 바로가기
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with Official Information & Social Links -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-wrap">
+          <img src="images/logo_transparent.png" alt="샬롬자유학교 로고" class="footer-logo">
+          <div class="footer-brand">
+            <h3>샬롬자유학교</h3>
+            <p>
+              "하나님의 형상을 회복하고 삶의 힘을 기르는 교육"에 목적을 두고, 자유와 사랑, 그리고 대안의 삶을 추구하고자 하는 청소년들의 교육공동체입니다. 스스로 선택하고, 책임지며, 서로를 안아주면서, 나도 기댈 수 있는 공동체를 만들어 갑니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          <h4>학교 정보 및 공식 채널</h4>
+          <div class="footer-info-list">
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span><strong>전화번호</strong> 031-581-6767 / 010-5528-9596</span>
+            </div>
+
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span><strong>이메일</strong> sfcy2019@naver.com (또는 shalomfree@shalomfree.kr)</span>
+            </div>
+
+            <div class="footer-info-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span><strong>주소</strong> 경기도 가평군 북면 석장모루길 11 2층 샬롬자유학교</span>
+            </div>
+          </div>
+
+          <div class="footer-social-links">
+            <a href="https://www.youtube.com/@devote7joy" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+              유튜브 채널
+            </a>
+
+            <a href="https://www.instagram.com/shalom_freedom/" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              인스타그램
+            </a>
+
+            <a href="https://m.blog.naver.com/sfcy2019?tab=1" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M4 4h16v16H4z"></path>
+                <path d="M9 8v8l6-8v8"></path>
+              </svg>
+              네이버 블로그
+            </a>
+
+            <a href="https://www.facebook.com/share/18oFF7Y9Ua/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+              페이스북
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 샬롬자유교육공동체 (Shalom Free Education Community). All rights reserved.</p>
+        <p>기독대안학교 · 경기도 가평</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Animation System -->
+  <script src="scroll-anim.js" defer></script>
+</body>
+</html>
